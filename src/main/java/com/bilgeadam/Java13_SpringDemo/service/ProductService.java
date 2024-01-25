@@ -6,7 +6,6 @@ import com.bilgeadam.Java13_SpringDemo.utility.IService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +37,7 @@ public class ProductService implements IService<Product,Long> {
 
     @Override
     public Iterable<Product> saveAll(Iterable<Product> t) {
-        return null;
+        return productRepository.saveAll(t);
     }
 
     @Override
@@ -65,7 +64,7 @@ public class ProductService implements IService<Product,Long> {
         if(productName.equalsIgnoreCase(productRepository.findByProductName(productName).get().getProductName())){
             return productRepository.findByProductName(productName);
         }
-        return null;
+        return Optional.empty();
     }
 
     public Optional<Product> findByProductNameIgnoreCase(String productName){
@@ -81,6 +80,38 @@ public class ProductService implements IService<Product,Long> {
 
     public List<Product> findAllByProductPriceBetween(Double start, Double end){
         return productRepository.findAllByProductPriceBetween(start,end);
+    }
+
+    public  List<Product> findAllByProductPriceGreaterThan(Double price){
+        return productRepository.findAllByProductPriceGreaterThan(price);
+    }
+
+    public List<Product> findAllByProductUnitInStockGreaterThan(Integer stock){
+        return productRepository.findAllByProductUnitInStockGreaterThan(stock);
+    }
+
+    public List<Product> findAllByProductPriceGreaterThanEqual(Double price){
+        return productRepository.findAllByProductPriceGreaterThanEqual(price);
+    }
+
+    public Integer countByProductCategoryIgnoreCase(String categoryName){
+        return productRepository.countByProductCategoryIgnoreCase(categoryName);
+    }
+
+    public  Integer countByProductNameIgnoreCase(String productName){
+        return productRepository.countByProductNameIgnoreCase(productName);
+    }
+
+    public Boolean existsByProductCategoryIgnoreCase(String categoryName){
+        return productRepository.existsByProductCategoryIgnoreCase(categoryName);
+    }
+
+    public List<Product> findAllByProductCategoryNull(){
+        return productRepository.findAllByProductCategoryNull();
+    }
+
+    public List<Product> findAllByProductNameStartsWith(String firstLetter){
+        return productRepository.findAllByProductNameStartsWith(firstLetter);
     }
 
 

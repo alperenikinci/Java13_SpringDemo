@@ -43,6 +43,8 @@ public class ProductController {
         return productService.findByProductNameIgnoreCase(productName);
     }
     @GetMapping("/find-all-by-product-name-like-ignore-case") //-> Bunun yerine containing kullanmak gerekiyor.
+                                                                // Bu bize ürün adında tam eşleşme varsa değer döner
+                                                                // -> Markası "..." olanları getir gibi kullanılabilir.
     public  List<Product> findAllByProductNameLikeIgnoreCase(String productName){
         return productService.findAllByProductNameLikeIgnoreCase(productName);
     }
@@ -56,6 +58,48 @@ public class ProductController {
     public List<Product> findAllByProductPriceBetween(Double start, Double end){
         return productService.findAllByProductPriceBetween(start,end);
     }
+
+    @GetMapping("/find-all-by-product-price-greater-than")
+    public  List<Product> findAllByProductPriceGreaterThan(Double price){
+        return productService.findAllByProductPriceGreaterThan(price);
+    }
+
+    @GetMapping("/find-all-by-product-unit-in-stock-greater-than")
+    public List<Product> findAllByProductUnitInStockGreaterThanEqual(Integer stock){
+        return productService.findAllByProductUnitInStockGreaterThan(stock);
+    }
+
+    @GetMapping("/find-all-by-product-price-greater-than-equal")
+    public List<Product> findAllByProductPriceGreaterThanEqual(Double price){
+        return productService.findAllByProductPriceGreaterThanEqual(price);
+    }
+
+    @GetMapping("/count-by-product-category-ignore-case") //ignore-case'i endpoint'e yazmasak da olur.
+    public Integer countByProductCategoryIgnoreCase(String categoryName){
+        return productService.countByProductCategoryIgnoreCase(categoryName);
+    }
+
+
+    @GetMapping("/count-by-product-name-ignore-case") //ignore-case'i endpoint'e yazmasak da olur.
+    public  Integer countByProductNameIgnoreCase(String productName){
+        return productService.countByProductNameIgnoreCase(productName);
+    }
+
+    @GetMapping("/exists-by-product-category-ignore-case") //ignore-case'i endpoint'e yazmasak da olur.
+    public Boolean existsByProductCategoryIgnoreCase(String categoryName){
+        return productService.existsByProductCategoryIgnoreCase(categoryName);
+    }
+
+    @GetMapping("/find-all-by-product-category-null")
+    public List<Product> findAllByProductCategoryNull(){
+        return productService.findAllByProductCategoryNull();
+    }
+
+    @GetMapping("/find-all-by-product-name-starts-with")
+    public List<Product> findAllByProductNameStartsWith(String firstLetter){
+        return productService.findAllByProductNameStartsWith(firstLetter);
+    }
+
 
 
 }
